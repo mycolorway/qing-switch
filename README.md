@@ -22,10 +22,6 @@ QingSwitch is a ui component inherited from QingModule.
 var qingSwitch = new QingSwitch({
   el: '.qing-switch'
 });
-
-qingSwitch.on('ready', function(e) {
-  // do something
-});
 ```
 
 ## Options
@@ -34,7 +30,15 @@ __el__
 
 Selector/Element/jQuery Object, required, specify the html element.
 
+__cls__
+
+Extra class added to wrapper.
+
 ## Methods
+
+__toggleState__ (state)
+
+Mannully switching on and off. Leave the `state` param as void for toggle.
 
 __destroy__ ()
 
@@ -42,9 +46,9 @@ Destroy component, restore element to original state.
 
 ## Events
 
-__ready__ (event)
+__switch__ (event, checked)
 
-Triggered after initialization.
+Triggered after switching. `checked` is the new state of QingSwtich.
 
 ## Installation
 
