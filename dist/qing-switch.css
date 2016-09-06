@@ -9,16 +9,16 @@
  * Date: 2016-09-6
  */
 .qing-switch {
-  width: 80px;
-  height: 40px;
+  width: 60px;
+  height: 34px;
   position: relative;
   background-color: #E8E8E8;
   border-radius: 40px;
   transition: background-color 0.4s;
   -webkit-transition: background-color 0.4s; }
   .qing-switch .switch-toggle {
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     top: 2px;
     left: 2px;
     position: absolute;
@@ -29,4 +29,4 @@
   .qing-switch.checked {
     background-color: #69D061; }
     .qing-switch.checked .switch-toggle {
-      margin-left: 40px; }
+      margin-left: 26px; }
