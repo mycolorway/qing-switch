@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>QingSwitch</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link media="all" rel="stylesheet" type="text/css" href="dist/qing-switch.css">
+
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="node_modules/qing-module/dist/qing-module.js"></script>
+	<script type="text/javascript" src="dist/qing-switch.js"></script>
+	<script type="text/javascript">
+		$(function() {
+      var qingSwitch = new QingSwitch({
+        el: '.test-el'
+      });
+		});
+	</script>
+
+</head>
+<body>
+  <input class="test-el" type="checkbox" />
+</body>
+</html>

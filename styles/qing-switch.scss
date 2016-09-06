@@ -1,0 +1,29 @@
+.qing-switch {
+  width: 80px;
+  height: 40px;
+  position: relative;
+  background-color: #E8E8E8;
+  border-radius: 40px;
+  transition: background-color 0.4s;
+  -webkit-transition: background-color 0.4s;
+
+  .switch-toggle {
+    width: 36px;
+    height: 36px;
+    top: 2px;
+    left: 2px;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: margin-left 0.4s;
+    -webkit-transition: margin-left 0.4s;
+  }
+
+  &.checked {
+    background-color: #69D061;
+    .switch-toggle {
+      margin-left: 40px;
+    }
+  }
+}
+

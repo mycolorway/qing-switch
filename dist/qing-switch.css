@@ -1,0 +1,32 @@
+/**
+ * qing-switch v0.0.1
+ * http://mycolorway.github.io/qing-switch
+ *
+ * Copyright Mycolorway Design
+ * Released under the MIT license
+ * http://mycolorway.github.io/qing-switch/license.html
+ *
+ * Date: 2016-09-6
+ */
+.qing-switch {
+  width: 80px;
+  height: 40px;
+  position: relative;
+  background-color: #E8E8E8;
+  border-radius: 40px;
+  transition: background-color 0.4s;
+  -webkit-transition: background-color 0.4s; }
+  .qing-switch .switch-toggle {
+    width: 36px;
+    height: 36px;
+    top: 2px;
+    left: 2px;
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: margin-left 0.4s;
+    -webkit-transition: margin-left 0.4s; }
+  .qing-switch.checked {
+    background-color: #69D061; }
+    .qing-switch.checked .switch-toggle {
+      margin-left: 40px; }
