@@ -47,7 +47,7 @@ QingSwitch = (function(superClass) {
   }
 
   QingSwitch.prototype._render = function() {
-    this.wrapper = $("<div class=\"qing-switch\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qingSwitch', this).addClass(this.opts.cls).insertBefore(this.el);
+    this.wrapper = $("<div class=\"qing-switch\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qingSwitch', this).addClass(this.opts.cls).insertBefore(this.el).append(this.el);
     return this.el.hide().data('qingSwitch', this);
   };
 
@@ -75,8 +75,8 @@ QingSwitch = (function(superClass) {
   };
 
   QingSwitch.prototype.destroy = function() {
-    this.wrapper.remove();
-    return this.el.show().removeData('qingSwitch').off('.qingSwitch');
+    this.el.show().insertBefore(this.wrapper).removeData('qingSwitch').off('.qingSwitch');
+    return this.wrapper.remove();
   };
 
   return QingSwitch;

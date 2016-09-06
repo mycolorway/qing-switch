@@ -28,6 +28,7 @@ class QingSwitch extends QingModule
       .data 'qingSwitch', @
       .addClass @opts.cls
       .insertBefore @el
+      .append(@el)
 
     @el.hide()
       .data 'qingSwitch', @
@@ -46,9 +47,10 @@ class QingSwitch extends QingModule
     @trigger 'switch', [state]
 
   destroy: ->
-    @wrapper.remove()
     @el.show()
+      .insertBefore(@wrapper)
       .removeData 'qingSwitch'
       .off '.qingSwitch'
+    @wrapper.remove()
 
 module.exports = QingSwitch

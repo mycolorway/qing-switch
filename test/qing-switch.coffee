@@ -83,9 +83,9 @@ describe 'QingSwitch', ->
 
   it 'should show original checkbox after calling destroy', ->
     expect($el.is(':hidden')).to.be.true
-    expect($el.prev('.qing-switch').is(':visible')).to.be.true
+    expect($el.closest('.qing-switch').is(':visible')).to.be.true
 
     qingSwitch.destroy()
     expect($el.is(':visible')).to.be.true
-    expect($el.prev('.qing-switch').length).to.be.equal 0
+    expect($el.closest('.qing-switch').length).to.be.equal 0
 
