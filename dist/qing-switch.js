@@ -6,7 +6,7 @@
  * Released under the MIT license
  * http://mycolorway.github.io/qing-switch/license.html
  *
- * Date: 2016-09-6
+ * Date: 2016-09-7
  */
 ;(function(root, factory) {
   if (typeof module === 'object' && module.exports) {
@@ -33,6 +33,7 @@ QingSwitch = (function(superClass) {
   function QingSwitch(opts) {
     this.toggleState = bind(this.toggleState, this);
     QingSwitch.__super__.constructor.apply(this, arguments);
+    this.opts = $.extend({}, QingSwitch.opts, this.opts);
     this.el = $(this.opts.el);
     if (!(this.el.length > 0)) {
       throw new Error('QingSwitch: option el is required');
@@ -40,7 +41,6 @@ QingSwitch = (function(superClass) {
     if (!$(this.opts.el).is(':checkbox')) {
       throw new Error("QingSwitch: el should be a checkbox");
     }
-    this.opts = $.extend({}, QingSwitch.opts, this.opts);
     this._render();
     this._bind();
     this.toggleState(this.el.is(':checked'));

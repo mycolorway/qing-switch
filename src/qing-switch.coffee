@@ -6,6 +6,7 @@ class QingSwitch extends QingModule
 
   constructor: (opts) ->
     super
+    @opts = $.extend {}, QingSwitch.opts, @opts
 
     @el = $ @opts.el
     unless @el.length > 0
@@ -13,7 +14,6 @@ class QingSwitch extends QingModule
     unless $(@opts.el).is(':checkbox')
       throw new Error "QingSwitch: el should be a checkbox"
 
-    @opts = $.extend {}, QingSwitch.opts, @opts
     @_render()
     @_bind()
 

@@ -15,7 +15,7 @@ QingSwitch is a ui component inherited from QingModule.
 <script type="text/javascript" src="node_modules/qing-module/dist/qing-module.js"></script>
 <script type="text/javascript" src="node_modules/qing-switch/dist/qing-switch.js"></script>
 
-<div class="qing-switch"></div>
+<input class="qing-switch" type="checkbox" />
 ```
 
 ```js
