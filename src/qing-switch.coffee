@@ -13,7 +13,8 @@ class QingSwitch extends QingModule
       throw new Error 'QingSwitch: option el is required'
     unless $(@opts.el).is(':checkbox')
       throw new Error "QingSwitch: el should be a checkbox"
-    return if @el.data('qing-switch')
+    if (initialized = @el.data('qingSwitch'))
+      return initialized
 
     @_render()
     @_bind()
@@ -26,13 +27,13 @@ class QingSwitch extends QingModule
         <div class="switch-toggle"></div>
       </div>
     """)
-      .data 'qing-switch', @
+      .data 'qingSwitch', @
       .addClass @opts.cls
       .insertBefore @el
       .append(@el)
 
     @el.hide()
-      .data 'qing-switch', @
+      .data 'qingSwitch', @
 
     @disabled @el.is(':disabled')
 
@@ -40,7 +41,7 @@ class QingSwitch extends QingModule
     @wrapper.on 'click', =>
       @el.click()
 
-    @el.on 'change.qing-switch', =>
+    @el.on 'change.qingSwitch', =>
       @toggleState @el.is(':checked')
 
   toggleState: (state = !@el.is(':checked')) =>
@@ -56,8 +57,8 @@ class QingSwitch extends QingModule
   destroy: ->
     @el.show()
       .insertBefore(@wrapper)
-      .removeData 'qing-switch'
-      .off '.qing-switch'
+      .removeData 'qingSwitch'
+      .off '.qingSwitch'
     @wrapper.remove()
 
 module.exports = QingSwitch

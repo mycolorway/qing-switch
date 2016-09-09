@@ -33,6 +33,7 @@ QingSwitch = (function(superClass) {
   function QingSwitch(opts) {
     this.disabled = bind(this.disabled, this);
     this.toggleState = bind(this.toggleState, this);
+    var initialized;
     QingSwitch.__super__.constructor.apply(this, arguments);
     this.opts = $.extend({}, QingSwitch.opts, this.opts);
     this.el = $(this.opts.el);
@@ -42,8 +43,8 @@ QingSwitch = (function(superClass) {
     if (!$(this.opts.el).is(':checkbox')) {
       throw new Error("QingSwitch: el should be a checkbox");
     }
-    if (this.el.data('qing-switch')) {
-      return;
+    if ((initialized = this.el.data('qingSwitch'))) {
+      return initialized;
     }
     this._render();
     this._bind();
@@ -51,8 +52,8 @@ QingSwitch = (function(superClass) {
   }
 
   QingSwitch.prototype._render = function() {
-    this.wrapper = $("<div class=\"qing-switch\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qing-switch', this).addClass(this.opts.cls).insertBefore(this.el).append(this.el);
-    this.el.hide().data('qing-switch', this);
+    this.wrapper = $("<div class=\"qing-switch\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qingSwitch', this).addClass(this.opts.cls).insertBefore(this.el).append(this.el);
+    this.el.hide().data('qingSwitch', this);
     return this.disabled(this.el.is(':disabled'));
   };
 
@@ -62,7 +63,7 @@ QingSwitch = (function(superClass) {
         return _this.el.click();
       };
     })(this));
-    return this.el.on('change.qing-switch', (function(_this) {
+    return this.el.on('change.qingSwitch', (function(_this) {
       return function() {
         return _this.toggleState(_this.el.is(':checked'));
       };
@@ -92,7 +93,7 @@ QingSwitch = (function(superClass) {
   };
 
   QingSwitch.prototype.destroy = function() {
-    this.el.show().insertBefore(this.wrapper).removeData('qing-switch').off('.qing-switch');
+    this.el.show().insertBefore(this.wrapper).removeData('qingSwitch').off('.qingSwitch');
     return this.wrapper.remove();
   };
 
