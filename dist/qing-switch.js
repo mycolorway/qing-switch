@@ -42,14 +42,17 @@ QingSwitch = (function(superClass) {
     if (!$(this.opts.el).is(':checkbox')) {
       throw new Error("QingSwitch: el should be a checkbox");
     }
+    if (this.el.data('qing-switch')) {
+      return;
+    }
     this._render();
     this._bind();
     this.toggleState(this.el.is(':checked'));
   }
 
   QingSwitch.prototype._render = function() {
-    this.wrapper = $("<div class=\"qing-switch\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qingSwitch', this).addClass(this.opts.cls).insertBefore(this.el).append(this.el);
-    this.el.hide().data('qingSwitch', this);
+    this.wrapper = $("<div class=\"qing-switch\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qing-switch', this).addClass(this.opts.cls).insertBefore(this.el).append(this.el);
+    this.el.hide().data('qing-switch', this);
     return this.disabled(this.el.is(':disabled'));
   };
 
@@ -59,7 +62,7 @@ QingSwitch = (function(superClass) {
         return _this.el.click();
       };
     })(this));
-    return this.el.on('change.qingSwitch', (function(_this) {
+    return this.el.on('change.qing-switch', (function(_this) {
       return function() {
         return _this.toggleState(_this.el.is(':checked'));
       };
@@ -89,7 +92,7 @@ QingSwitch = (function(superClass) {
   };
 
   QingSwitch.prototype.destroy = function() {
-    this.el.show().insertBefore(this.wrapper).removeData('qingSwitch').off('.qingSwitch');
+    this.el.show().insertBefore(this.wrapper).removeData('qing-switch').off('.qing-switch');
     return this.wrapper.remove();
   };
 
