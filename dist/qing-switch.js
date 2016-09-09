@@ -6,7 +6,7 @@
  * Released under the MIT license
  * http://mycolorway.github.io/qing-switch/license.html
  *
- * Date: 2016-09-7
+ * Date: 2016-09-9
  */
 ;(function(root, factory) {
   if (typeof module === 'object' && module.exports) {
@@ -31,6 +31,7 @@ QingSwitch = (function(superClass) {
   };
 
   function QingSwitch(opts) {
+    this.disabled = bind(this.disabled, this);
     this.toggleState = bind(this.toggleState, this);
     QingSwitch.__super__.constructor.apply(this, arguments);
     this.opts = $.extend({}, QingSwitch.opts, this.opts);
@@ -48,7 +49,8 @@ QingSwitch = (function(superClass) {
 
   QingSwitch.prototype._render = function() {
     this.wrapper = $("<div class=\"qing-switch\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qingSwitch', this).addClass(this.opts.cls).insertBefore(this.el).append(this.el);
-    return this.el.hide().data('qingSwitch', this);
+    this.el.hide().data('qingSwitch', this);
+    return this.disabled(this.el.is(':disabled'));
   };
 
   QingSwitch.prototype._bind = function() {
@@ -72,6 +74,18 @@ QingSwitch = (function(superClass) {
     this.wrapper.toggleClass('checked', state);
     this.checked = state;
     return this.trigger('switch', [state]);
+  };
+
+  QingSwitch.prototype.disabled = function(disabled) {
+    if (disabled == null) {
+      disabled = true;
+    }
+    if (disabled) {
+      this.el.attr('disabled', true);
+    } else {
+      this.el.removeAttr('disabled');
+    }
+    return this.wrapper.toggleClass('disabled', disabled);
   };
 
   QingSwitch.prototype.destroy = function() {

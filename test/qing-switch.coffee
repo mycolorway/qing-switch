@@ -89,3 +89,21 @@ describe 'QingSwitch', ->
     expect($el.is(':visible')).to.be.true
     expect($el.closest('.qing-switch').length).to.be.equal 0
 
+  it 'should be disabled when checkbox is disabled', ->
+    expect(qingSwitch.wrapper.is('.disabled')).to.be.false
+
+    qingSwitch.destroy()
+    $el.attr('disabled', true)
+    qingSwitch = new QingSwitch
+      el: '.test-el'
+
+    expect(qingSwitch.wrapper.is('.disabled')).to.be.true
+
+  it 'should be disabled when call disabled()', ->
+    qingSwitch.disabled()
+    expect(qingSwitch.wrapper.is('.disabled')).to.be.true
+    expect($el.is(':disabled')).to.be.true
+
+    qingSwitch.disabled(false)
+    expect(qingSwitch.wrapper.is('.disabled')).to.be.false
+    expect($el.is(':disabled')).to.be.false

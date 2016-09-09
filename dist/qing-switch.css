@@ -31,3 +31,5 @@
     background-color: #69D061; }
     .qing-switch.checked .switch-toggle {
       margin-left: 26px; }
+  .qing-switch.disabled {
+    opacity: 0.5; }

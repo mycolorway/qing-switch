@@ -33,6 +33,8 @@ class QingSwitch extends QingModule
     @el.hide()
       .data 'qingSwitch', @
 
+    @disabled @el.is(':disabled')
+
   _bind: ->
     @wrapper.on 'click', =>
       @el.click()
@@ -45,6 +47,10 @@ class QingSwitch extends QingModule
     @wrapper.toggleClass 'checked', state
     @checked = state
     @trigger 'switch', [state]
+
+  disabled: (disabled = true) =>
+    if disabled then @el.attr('disabled', true) else @el.removeAttr('disabled')
+    @wrapper.toggleClass 'disabled', disabled
 
   destroy: ->
     @el.show()

@@ -40,6 +40,10 @@ __toggleState__ (state)
 
 Mannully switching on and off. Leave the `state` param as void for toggle.
 
+__disabled__ (disabled)
+
+Mannully disable & enable the switch. set the param as false to enable, leave it as void or set as true to disable.
+
 __destroy__ ()
 
 Destroy component, restore element to original state.
