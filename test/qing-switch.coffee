@@ -107,3 +107,15 @@ describe 'QingSwitch', ->
     qingSwitch.disabled(false)
     expect(qingSwitch.wrapper.is('.disabled')).to.be.false
     expect($el.is(':disabled')).to.be.false
+
+  it 'should toggleState when key down with space or enter', ->
+    expect($el.is(':checked')).to.be.false
+    event = $.Event 'keydown',
+      keyCode: 31
+    $el.trigger event
+    expect($el.is(':checked')).to.be.false
+
+    event = $.Event 'keydown',
+      keyCode: 13
+    $el.trigger event
+    expect($el.is(':checked')).to.be.true

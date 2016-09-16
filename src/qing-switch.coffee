@@ -23,7 +23,7 @@ class QingSwitch extends QingModule
 
   _render: ->
     @wrapper = $("""
-      <div class="qing-switch">
+      <div class="qing-switch" tabindex="0">
         <div class="switch-toggle"></div>
       </div>
     """)
@@ -38,8 +38,12 @@ class QingSwitch extends QingModule
     @disabled @el.is(':disabled')
 
   _bind: ->
-    @wrapper.on 'click', =>
+    @wrapper.on 'click.qingSwitch', =>
       @el.click()
+
+    @wrapper.on 'keydown.qingSwitch', (e)=>
+      return unless e.keyCode == 13
+      @toggleState()
 
     @el.on 'change.qingSwitch', =>
       @toggleState @el.is(':checked')

@@ -6,7 +6,7 @@
  * Released under the MIT license
  * http://mycolorway.github.io/qing-switch/license.html
  *
- * Date: 2016-09-9
+ * Date: 2016-09-16
  */
 .qing-switch {
   display: inline-block;
@@ -33,3 +33,7 @@
       margin-left: 26px; }
   .qing-switch.disabled {
     opacity: 0.5; }
+  .qing-switch:focus {
+    border-color: #63D65C;
+    box-shadow: 0px 0px 4px 0px rgba(74, 144, 226, 0.5);
+    outline: none; }

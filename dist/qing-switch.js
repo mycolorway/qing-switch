@@ -6,7 +6,7 @@
  * Released under the MIT license
  * http://mycolorway.github.io/qing-switch/license.html
  *
- * Date: 2016-09-9
+ * Date: 2016-09-16
  */
 ;(function(root, factory) {
   if (typeof module === 'object' && module.exports) {
@@ -52,15 +52,23 @@ QingSwitch = (function(superClass) {
   }
 
   QingSwitch.prototype._render = function() {
-    this.wrapper = $("<div class=\"qing-switch\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qingSwitch', this).addClass(this.opts.cls).insertBefore(this.el).append(this.el);
+    this.wrapper = $("<div class=\"qing-switch\" tabindex=\"0\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qingSwitch', this).addClass(this.opts.cls).insertBefore(this.el).append(this.el);
     this.el.hide().data('qingSwitch', this);
     return this.disabled(this.el.is(':disabled'));
   };
 
   QingSwitch.prototype._bind = function() {
-    this.wrapper.on('click', (function(_this) {
+    this.wrapper.on('click.qingSwitch', (function(_this) {
       return function() {
         return _this.el.click();
+      };
+    })(this));
+    this.wrapper.on('keydown.qingSwitch', (function(_this) {
+      return function(e) {
+        if (e.keyCode !== 13) {
+          return;
+        }
+        return _this.toggleState();
       };
     })(this));
     return this.el.on('change.qingSwitch', (function(_this) {
