@@ -31,15 +31,11 @@ QingSwitch = (function(superClass) {
   };
 
   function QingSwitch(opts) {
-    this.disabled = bind(this.disabled, this);
     this.toggleState = bind(this.toggleState, this);
     var initialized;
     QingSwitch.__super__.constructor.apply(this, arguments);
     this.opts = $.extend({}, QingSwitch.opts, this.opts);
     this.el = $(this.opts.el);
-    if (!(this.el.length > 0)) {
-      throw new Error('QingSwitch: option el is required');
-    }
     if (!$(this.opts.el).is(':checkbox')) {
       throw new Error("QingSwitch: el should be a checkbox");
     }
@@ -54,7 +50,9 @@ QingSwitch = (function(superClass) {
   QingSwitch.prototype._render = function() {
     this.wrapper = $("<div class=\"qing-switch\" tabindex=\"0\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qingSwitch', this).addClass(this.opts.cls).insertBefore(this.el).append(this.el);
     this.el.hide().data('qingSwitch', this);
-    return this.disabled(this.el.is(':disabled'));
+    if (this.el.is(':disabled')) {
+      return this.disable();
+    }
   };
 
   QingSwitch.prototype._bind = function() {
@@ -65,7 +63,7 @@ QingSwitch = (function(superClass) {
     })(this));
     this.wrapper.on('keydown.qingSwitch', (function(_this) {
       return function(e) {
-        if (e.keyCode !== 13) {
+        if (!(e.keyCode === 13 && !_this.wrapper.is('.disabled'))) {
           return;
         }
         return _this.toggleState();
@@ -88,16 +86,14 @@ QingSwitch = (function(superClass) {
     return this.trigger('switch', [state]);
   };
 
-  QingSwitch.prototype.disabled = function(disabled) {
-    if (disabled == null) {
-      disabled = true;
-    }
-    if (disabled) {
-      this.el.attr('disabled', true);
-    } else {
-      this.el.removeAttr('disabled');
-    }
-    return this.wrapper.toggleClass('disabled', disabled);
+  QingSwitch.prototype.disable = function() {
+    this.el.attr('disabled', true);
+    return this.wrapper.addClass('disabled').removeAttr('tabindex');
+  };
+
+  QingSwitch.prototype.enable = function() {
+    this.el.removeAttr('disabled');
+    return this.wrapper.removeClass('disabled').attr('tabindex', '0');
   };
 
   QingSwitch.prototype.destroy = function() {

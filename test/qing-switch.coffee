@@ -100,11 +100,11 @@ describe 'QingSwitch', ->
     expect(qingSwitch.wrapper.is('.disabled')).to.be.true
 
   it 'should be disabled when call disabled()', ->
-    qingSwitch.disabled()
+    qingSwitch.disable()
     expect(qingSwitch.wrapper.is('.disabled')).to.be.true
     expect($el.is(':disabled')).to.be.true
 
-    qingSwitch.disabled(false)
+    qingSwitch.enable()
     expect(qingSwitch.wrapper.is('.disabled')).to.be.false
     expect($el.is(':disabled')).to.be.false
 

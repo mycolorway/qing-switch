@@ -9,8 +9,6 @@ class QingSwitch extends QingModule
     @opts = $.extend {}, QingSwitch.opts, @opts
 
     @el = $ @opts.el
-    unless @el.length > 0
-      throw new Error 'QingSwitch: option el is required'
     unless $(@opts.el).is(':checkbox')
       throw new Error "QingSwitch: el should be a checkbox"
     if (initialized = @el.data('qingSwitch'))
@@ -35,14 +33,14 @@ class QingSwitch extends QingModule
     @el.hide()
       .data 'qingSwitch', @
 
-    @disabled @el.is(':disabled')
+    @disable() if @el.is(':disabled')
 
   _bind: ->
     @wrapper.on 'click.qingSwitch', =>
       @el.click()
 
     @wrapper.on 'keydown.qingSwitch', (e)=>
-      return unless e.keyCode == 13
+      return unless e.keyCode == 13 && !@wrapper.is('.disabled')
       @toggleState()
 
     @el.on 'change.qingSwitch', =>
@@ -54,9 +52,15 @@ class QingSwitch extends QingModule
     @checked = state
     @trigger 'switch', [state]
 
-  disabled: (disabled = true) =>
-    if disabled then @el.attr('disabled', true) else @el.removeAttr('disabled')
-    @wrapper.toggleClass 'disabled', disabled
+  disable: ->
+    @el.attr 'disabled', true
+    @wrapper.addClass 'disabled'
+            .removeAttr 'tabindex'
+
+  enable: ->
+    @el.removeAttr 'disabled'
+    @wrapper.removeClass 'disabled'
+            .attr 'tabindex', '0'
 
   destroy: ->
     @el.show()

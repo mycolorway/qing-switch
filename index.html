@@ -15,11 +15,20 @@
       var qingSwitch = new QingSwitch({
         el: '.test-el'
       });
+
+      var qingSwitchB = new QingSwitch({
+        el: '.test-el-disabled'
+      });
 		});
 	</script>
 
 </head>
 <body>
-  <input class="test-el" type="checkbox" checked />
+  <p>
+    <input class="test-el" type="checkbox" checked />
+  </p>
+  <p>
+    <input class="test-el-disabled" type="checkbox" checked disabled />
+  </p>
 </body>
 </html>
