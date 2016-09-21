@@ -56,10 +56,6 @@ describe 'QingSwitch', ->
     expect(qingSwitch.checked).to.be.false
     expect($el.is(':checked')).to.be.false
 
-    $el.click()
-    expect(qingSwitch.checked).to.be.true
-    expect($el.is(':checked')).to.be.true
-
     qingSwitch.toggleState(false)
     expect(qingSwitch.checked).to.be.false
     expect($el.is(':checked')).to.be.false

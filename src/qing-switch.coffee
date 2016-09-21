@@ -37,14 +37,12 @@ class QingSwitch extends QingModule
 
   _bind: ->
     @wrapper.on 'click.qingSwitch', =>
-      @el.click()
+      @toggleState()
+      false
 
     @wrapper.on 'keydown.qingSwitch', (e)=>
       return unless e.keyCode == 13 && !@wrapper.is('.disabled')
       @toggleState()
-
-    @el.on 'change.qingSwitch', =>
-      @toggleState @el.is(':checked')
 
   toggleState: (state = !@el.is(':checked')) =>
     @el.prop 'checked', state
