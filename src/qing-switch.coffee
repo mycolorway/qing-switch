@@ -21,44 +21,40 @@ class QingSwitch extends QingModule
 
   _render: ->
     @wrapper = $("""
-      <div class="qing-switch" tabindex="0">
-        <div class="switch-toggle"></div>
-      </div>
+      <label class="qing-switch">
+        <div class="switch" tabindex="0">
+          <span class="switch-toggle"></span>
+        </div>
+      </label>
     """)
       .data 'qingSwitch', @
       .addClass @opts.cls
       .insertBefore @el
-      .append(@el)
+      .prepend(@el)
 
-    @el.hide()
-      .data 'qingSwitch', @
-
-    @disable() if @el.is(':disabled')
+    @switch = @wrapper.find('.switch')
+    @switch.removeAttr 'tabindex' if @el.is ':disabled'
+    @el.hide().data 'qingSwitch', @
 
   _bind: ->
-    @wrapper.on 'click.qingSwitch', =>
-      @toggleState()
-      false
-
     @wrapper.on 'keydown.qingSwitch', (e)=>
-      return unless e.keyCode == 13 && !@wrapper.is('.disabled')
+      return unless e.keyCode == 13
       @toggleState()
+
+    @el.on 'change', (e) =>
+      @trigger 'change', @el.prop('checked')
 
   toggleState: (state = !@el.is(':checked')) =>
     @el.prop 'checked', state
-    @wrapper.toggleClass 'checked', state
-    @checked = state
-    @trigger 'switch', [state]
+    @el.trigger 'change'
 
   disable: ->
     @el.attr 'disabled', true
-    @wrapper.addClass 'disabled'
-            .removeAttr 'tabindex'
+    @switch.removeAttr 'tabindex'
 
   enable: ->
     @el.removeAttr 'disabled'
-    @wrapper.removeClass 'disabled'
-            .attr 'tabindex', '0'
+    @switch.attr 'tabindex', '0'
 
   destroy: ->
     @el.show()

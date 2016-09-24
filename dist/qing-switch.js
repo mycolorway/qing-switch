@@ -6,7 +6,7 @@
  * Released under the MIT license
  * http://mycolorway.github.io/qing-switch/license.html
  *
- * Date: 2016-09-21
+ * Date: 2016-09-24
  */
 ;(function(root, factory) {
   if (typeof module === 'object' && module.exports) {
@@ -48,26 +48,26 @@ QingSwitch = (function(superClass) {
   }
 
   QingSwitch.prototype._render = function() {
-    this.wrapper = $("<div class=\"qing-switch\" tabindex=\"0\">\n  <div class=\"switch-toggle\"></div>\n</div>").data('qingSwitch', this).addClass(this.opts.cls).insertBefore(this.el).append(this.el);
-    this.el.hide().data('qingSwitch', this);
+    this.wrapper = $("<label class=\"qing-switch\">\n  <div class=\"switch\" tabindex=\"0\">\n    <span class=\"switch-toggle\"></span>\n  </div>\n</label>").data('qingSwitch', this).addClass(this.opts.cls).insertBefore(this.el).prepend(this.el);
+    this["switch"] = this.wrapper.find('.switch');
     if (this.el.is(':disabled')) {
-      return this.disable();
+      this["switch"].removeAttr('tabindex');
     }
+    return this.el.hide().data('qingSwitch', this);
   };
 
   QingSwitch.prototype._bind = function() {
-    this.wrapper.on('click.qingSwitch', (function(_this) {
-      return function() {
-        _this.toggleState();
-        return false;
-      };
-    })(this));
-    return this.wrapper.on('keydown.qingSwitch', (function(_this) {
+    this.wrapper.on('keydown.qingSwitch', (function(_this) {
       return function(e) {
-        if (!(e.keyCode === 13 && !_this.wrapper.is('.disabled'))) {
+        if (e.keyCode !== 13) {
           return;
         }
         return _this.toggleState();
+      };
+    })(this));
+    return this.el.on('change', (function(_this) {
+      return function(e) {
+        return _this.trigger('change', _this.el.prop('checked'));
       };
     })(this));
   };
@@ -77,19 +77,17 @@ QingSwitch = (function(superClass) {
       state = !this.el.is(':checked');
     }
     this.el.prop('checked', state);
-    this.wrapper.toggleClass('checked', state);
-    this.checked = state;
-    return this.trigger('switch', [state]);
+    return this.el.trigger('change');
   };
 
   QingSwitch.prototype.disable = function() {
     this.el.attr('disabled', true);
-    return this.wrapper.addClass('disabled').removeAttr('tabindex');
+    return this["switch"].removeAttr('tabindex');
   };
 
   QingSwitch.prototype.enable = function() {
     this.el.removeAttr('disabled');
-    return this.wrapper.removeClass('disabled').attr('tabindex', '0');
+    return this["switch"].attr('tabindex', '0');
   };
 
   QingSwitch.prototype.destroy = function() {
