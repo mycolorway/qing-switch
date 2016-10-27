@@ -41,6 +41,10 @@ class QingSwitch extends QingModule
       return unless e.keyCode == 13
       @toggleState()
 
+    @switch.on 'click', =>
+      @toggleState()
+      false
+
     @el.on 'change', (e) =>
       @trigger 'change', @el.prop('checked')
 
