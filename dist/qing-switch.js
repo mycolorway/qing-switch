@@ -6,7 +6,7 @@
  * Released under the MIT license
  * http://mycolorway.github.io/qing-switch/license.html
  *
- * Date: 2016-10-27
+ * Date: 2017-02-10
  */
 ;(function(root, factory) {
   if (typeof module === 'object' && module.exports) {
@@ -44,6 +44,9 @@ QingSwitch = (function(superClass) {
     }
     this._render();
     this._bind();
+    if (this.el.is(':disabled')) {
+      this.disable();
+    }
     this.toggleState(this.el.is(':checked'));
   }
 
@@ -67,6 +70,9 @@ QingSwitch = (function(superClass) {
     })(this));
     this["switch"].on('click', (function(_this) {
       return function() {
+        if (_this.el.is(':disabled')) {
+          return;
+        }
         _this.toggleState();
         return false;
       };

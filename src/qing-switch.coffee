@@ -17,6 +17,7 @@ class QingSwitch extends QingModule
     @_render()
     @_bind()
 
+    @disable() if @el.is(':disabled')
     @toggleState(@el.is(':checked'))
 
   _render: ->
@@ -42,6 +43,7 @@ class QingSwitch extends QingModule
       @toggleState()
 
     @switch.on 'click', =>
+      return if @el.is ':disabled'
       @toggleState()
       false
 
