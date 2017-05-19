@@ -18,7 +18,6 @@ class QingSwitch extends QingModule
     @_bind()
 
     @disable() if @el.is(':disabled')
-    @toggleState(@el.is(':checked'))
 
   _render: ->
     @wrapper = $("""
@@ -50,7 +49,7 @@ class QingSwitch extends QingModule
     @el.on 'change', (e) =>
       @trigger 'change', @el.prop('checked')
 
-  toggleState: (state = !@el.is(':checked')) =>
+  toggleState: (state = !@el.is(':checked')) ->
     @el.prop 'checked', state
     @el.trigger 'change'
 
